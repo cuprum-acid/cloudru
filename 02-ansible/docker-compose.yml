@@ -1,0 +1,16 @@
+services:
+  app:
+    image: ebob/echo-server:latest
+    deploy:
+      replicas: 3
+    environment:
+      AUTHOR: "Evgeny B"
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
